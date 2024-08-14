@@ -26,30 +26,34 @@ void kill_to_server(pid_t server_pid, int sig)
     }
 }
 
-void	ft_send_bit(pid_t pid, char c)
-{
-	int	bit;
-
-	bit = 0;
-	while (bit < 8)
-	{
-		usleep(500);
-		if (((c >> bit) & 1) == 1)
-            kill_to_server(pid, SIGUSR1);
-		else
-            kill_to_server(pid, SIGUSR2);
-		bit++;
-	}
-}
-
 void	ft_send_message(pid_t pid, char *message)
 {
+    int bit;
+
 	while (*message != '\0')
 	{
-		ft_send_bit(pid, *message);
+        bit = 0;
+		while (bit < 8)
+        {
+            usleep(500);
+            if (((*message >> bit) & 1) == 1)
+                kill_to_server(pid, SIGUSR1);
+            else
+                kill_to_server(pid, SIGUSR2);
+            bit++;
+        }
 		message++;
 	}
-	ft_send_bit(pid, '\0');
+    bit = 0;
+	while (bit < 8)
+    {
+        usleep(500);
+        if (((*message >> bit) & 1) == 1)
+            kill_to_server(pid, SIGUSR1);
+        else
+            kill_to_server(pid, SIGUSR2);
+        bit++;
+    }
 }
 
 int	main(int argc, char *argv[])
