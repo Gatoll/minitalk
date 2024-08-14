@@ -12,9 +12,9 @@ void error_message(int err)
         ft_putstr_fd("Usage: ./client <server_pid> <message>\n", 2);
 }
 
-void kill_to_server(pid_t server_pid, int sig)
+void kill_to_server(pid_t server_pid, char mess_w, int bit)
 {
-    if (sig == SIGUSR1)
+    if (((mess_w >> bit) & 1) == 1)
     {
         if (kill(server_pid, SIGUSR1) == -1)
             error_message(ERROR_KILL);
@@ -36,10 +36,7 @@ void	ft_send_message(pid_t pid, char *message)
 		while (bit < 8)
         {
             usleep(500);
-            if (((*message >> bit) & 1) == 1)
-                kill_to_server(pid, SIGUSR1);
-            else
-                kill_to_server(pid, SIGUSR2);
+            kill_to_server(pid, *message, bit);
             bit++;
         }
 		message++;
@@ -48,10 +45,7 @@ void	ft_send_message(pid_t pid, char *message)
 	while (bit < 8)
     {
         usleep(500);
-        if (((*message >> bit) & 1) == 1)
-            kill_to_server(pid, SIGUSR1);
-        else
-            kill_to_server(pid, SIGUSR2);
+        kill_to_server(pid, *message, bit);
         bit++;
     }
 }
