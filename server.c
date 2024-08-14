@@ -12,6 +12,20 @@ void error_message(int err)
         ft_putstr_fd("Usage: ./client <server_pid> <message>\n", 2);
 }
 
+void kill_to_client(pid_t client_pid, int sig)
+{
+    if (sig == SIGUSR1)
+    {
+        if (kill(client_pid, SIGUSR1) == -1)
+            error_message(ERROR_KILL);
+    }
+    else
+    {
+        if (kill(client_pid, SIGUSR2) == -1)
+            error_message(ERROR_KILL);
+    }
+}
+
 void	signal_handler(int sig, siginfo_t *info, void *context)
 {
 	static int	bit;
@@ -29,14 +43,18 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 		if (c == '\0')
         {
             write(1, "\n", 1);
-            if (kill(client_pid, SIGUSR2) == -1)
-                error_message(ERROR_KILL);  
+            kill_to_client(client_pid, SIGUSR2);
         }
 		else
+        {
 			write(1, &c, 1);
+            kill_to_client(client_pid, SIGUSR1);
+        }
 		bit = 0;
 		c = 0;
 	}
+    else
+        kill_to_client(client_pid, SIGUSR1);
 }
 
 int check_pid(pid_t pid)
