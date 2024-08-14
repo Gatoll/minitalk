@@ -45,13 +45,13 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 		else
         {
 			write(1, &c, 1);
-            kill_to_client(info->si_pid, SIGUSR1);
+            //kill_to_client(info->si_pid, SIGUSR1);
         }
 		bit = 0;
 		c = 0;
 	}
-    else
-        kill_to_client(info->si_pid, SIGUSR1);
+    //else
+        //kill_to_client(info->si_pid, SIGUSR1);
 }
 
 int check_pid(pid_t pid)
