@@ -12,20 +12,26 @@ void error_message(int err)
         ft_putstr_fd("Usage: ./client <server_pid> <message>\n", 2);
 }
 
-void	ft_handler(int sig)
+void	signal_handler(int sig, siginfo_t *info, void *context)
 {
 	static int	bit;
 	static char	c;
+    pid_t client_pid;
+    (void)context;
 	
+    client_pid = info->si_pid;
+
 	if (sig == SIGUSR1)
 		c |= (1 << bit);
-	else if (sig == SIGUSR2)
-		c &= ~(1 << bit);
 	bit++;
-	if (bit > 7)
+	if (bit == 8)
 	{
 		if (c == '\0')
-			write(1, "\n", 1);
+        {
+            write(1, "\n", 1);
+            if (kill(client_pid, SIGUSR2) == -1)
+                error_message(ERROR_KILL);  
+        }
 		else
 			write(1, &c, 1);
 		bit = 0;
@@ -33,15 +39,33 @@ void	ft_handler(int sig)
 	}
 }
 
+int check_pid(pid_t pid)
+{
+    if (pid < 0 || pid > INT_MAX)
+    {
+        error_message(ERROR_PID);
+        return (-1);
+    }
+    return (0);
+}
+
 int	main(void)
 {
 	pid_t	pid;
+    struct sigaction sa;
 
 	pid = getpid();
-	ft_putstr_fd("PID : ", 1);
-	ft_putnbr_fd(pid, 1);
-	ft_putchar_fd('\n', 1);
-	if (signal(SIGUSR1, ft_handler) == SIG_ERR || signal(SIGUSR2, ft_handler) == SIG_ERR)
+    if (check_pid(pid) == -1)
+    {
+        return (1);
+    }
+	ft_printf("PID : %d\n", pid);
+
+    sa.sa_sigaction = signal_handler;
+    sa.sa_flags = SA_SIGINFO;
+    sigemptyset(&sa.sa_mask);
+
+	if (sigaction(SIGUSR1, &sa, NULL) == -1 || sigaction(SIGUSR2, &sa, NULL) == -1)
 	{
 		error_message(ERROR_SIGACTION);
 		return (1);
