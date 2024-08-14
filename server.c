@@ -30,11 +30,8 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 {
 	static int	bit;
 	static char	c;
-    pid_t client_pid;
     (void)context;
 	
-    client_pid = info->si_pid;
-
 	if (sig == SIGUSR1)
 		c |= (1 << bit);
 	bit++;
@@ -43,18 +40,18 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 		if (c == '\0')
         {
             write(1, "\n", 1);
-            kill_to_client(client_pid, SIGUSR2);
+            kill_to_client(info->si_pid, SIGUSR2);
         }
 		else
         {
 			write(1, &c, 1);
-            kill_to_client(client_pid, SIGUSR1);
+            kill_to_client(info->si_pid, SIGUSR1);
         }
 		bit = 0;
 		c = 0;
 	}
     else
-        kill_to_client(client_pid, SIGUSR1);
+        kill_to_client(info->si_pid, SIGUSR1);
 }
 
 int check_pid(pid_t pid)
