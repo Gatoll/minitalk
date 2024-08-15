@@ -12,9 +12,4 @@
 #define ERROR_KILL 3
 #define ERROR_ARG 4
 
-typedef struct s_client_data {
-    pid_t server_pid;
-    char *message;
-} t_client_data;
-
 #endif
