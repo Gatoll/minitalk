@@ -29,8 +29,8 @@ void kill_to_client(pid_t client_pid, int sig)
 
 void	signal_handler(int sig, siginfo_t *info, void *context)
 {
-	static int	bit = 0;
-	static char	c = 0;
+	static int	bit;
+	static char	c;
     (void)context;
 	
 	if (sig == SIGUSR1)
@@ -42,7 +42,7 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
         {
             write(1, "\n", 1);
             kill_to_client(info->si_pid, SIGUSR2);
-            ft_putstr_fd("---server send complete---\n", 1);
+            ft_putstr_fd("---server complete---\n", 1);
         }
 		else
         {

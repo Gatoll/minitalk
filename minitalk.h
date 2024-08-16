@@ -4,7 +4,7 @@
 # include "./ft_printf/libft/libft.h"
 # include "./ft_printf/ft_printf.h"
 
-#include <aio.h> //pid_t
+#include <aio.h>
 #include <signal.h>
 
 #define TRUE 1
