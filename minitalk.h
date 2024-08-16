@@ -7,8 +7,11 @@
 #include <aio.h> //pid_t
 #include <signal.h>
 
+#define TRUE 1
+#define FALSE 0
+
 #define ERROR_PID 1
-#define ERROR_SIGACTION 2
+#define ERROR_SIGNAL 2
 #define ERROR_KILL 3
 #define ERROR_ARG 4
 
