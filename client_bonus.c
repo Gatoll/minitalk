@@ -35,7 +35,7 @@ void	signal_handler(int sig)
         flag = TRUE;
     else if (sig == SIGUSR2)
     {
-        ft_putstr_fd("---client completed---\n", 2);
+        ft_putstr_fd("---client complete---\n", 2);
         exit(0);
     }
 }
