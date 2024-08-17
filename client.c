@@ -54,7 +54,7 @@ void	ft_send_message(pid_t pid, char *message)
         if (flag == TRUE)
         {
             flag = FALSE;
-            usleep(30); // 50 .
+            usleep(30);
             kill_to_server(pid, *message, bit++);
         }
     }
@@ -63,7 +63,7 @@ void	ft_send_message(pid_t pid, char *message)
         if (flag == TRUE)
         {
             flag = FALSE;
-            usleep(30); // 50 .
+            usleep(30);
             kill_to_server(pid, *message, bit++);
         }
     }
