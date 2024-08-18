@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: kaokazak <kaokazak@student.42tokyo.jp>     +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/08/18 14:50:07 by kaokazak          #+#    #+#              #
+#    Updated: 2024/08/18 15:27:56 by kaokazak         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = minitalk
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -19,20 +31,19 @@ all: $(NAME)
 
 $(NAME): $(CLIENT) $(SERVER)
 
-$(CLIENT) : $(DIR_PRINTF) $(SRC_CLIENT)
+$(DIR_PRINTF)/libftprintf.a :
 	make -C ./$(DIR_PRINTF)
+
+$(CLIENT) : $(DIR_PRINTF) $(SRC_CLIENT) $(DIR_PRINTF)/libftprintf.a
 	$(CC) $(CFLAGS) $(SRC_CLIENT) -L./$(DIR_PRINTF)/ -lftprintf -o $(CLIENT)
 
-$(SERVER) : $(DIR_PRINTF) $(SRC_SERVER)
-	make -C ./$(DIR_PRINTF)
+$(SERVER) : $(DIR_PRINTF) $(SRC_SERVER) $(DIR_PRINTF)/libftprintf.a
 	$(CC) $(CFLAGS) $(SRC_SERVER) -L./$(DIR_PRINTF)/ -lftprintf -o $(SERVER)
 
-$(CLIENT_BONUS) : $(DIR_PRINTF) $(SRC_CLIENT_BONUS)
-	make -C ./$(DIR_PRINTF)
+$(CLIENT_BONUS) : $(DIR_PRINTF) $(SRC_CLIENT_BONUS) $(DIR_PRINTF)/libftprintf.a
 	$(CC) $(CFLAGS) $(SRC_CLIENT_BONUS) -L./$(DIR_PRINTF)/ -lftprintf -o $(CLIENT_BONUS)
 
-$(SERVER_BONUS) : $(DIR_PRINTF) $(SRC_SERVER_BONUS)
-	make -C ./$(DIR_PRINTF)
+$(SERVER_BONUS) : $(DIR_PRINTF) $(SRC_SERVER_BONUS) $(DIR_PRINTF)/libftprintf.a
 	$(CC) $(CFLAGS) $(SRC_SERVER_BONUS) -L./$(DIR_PRINTF)/ -lftprintf -o $(SERVER_BONUS)
 
 bonus: $(CLIENT_BONUS) $(SERVER_BONUS)
