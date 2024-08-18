@@ -58,7 +58,7 @@ void	signal_handler(int sig, siginfo_t *info, void *context)
 
 int check_pid(pid_t pid)
 {
-    if (pid < 0 || pid > INT_MAX)
+    if (pid < 1 || pid > INT_MAX)
     {
         error_message(ERROR_PID);
         return (-1);
