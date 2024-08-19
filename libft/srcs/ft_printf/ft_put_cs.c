@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_di.c                                        :+:      :+:    :+:   */
+/*   ft_put_cs.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaokazak <kaokazak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/29 13:30:04 by kaokazak          #+#    #+#             */
-/*   Updated: 2024/04/29 16:52:50 by kaokazak         ###   ########.fr       */
+/*   Created: 2024/04/29 13:30:02 by kaokazak          #+#    #+#             */
+/*   Updated: 2024/08/19 05:31:49 by kaokazak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "ft_printf.h"
 
-int	ft_putnbr_len(int num)
+int	ft_putchar_len(int c)
+{
+	write(1, &c, 1);
+	return (1);
+}
+
+int	ft_putstr_len(const char *str)
 {
 	int	len;
 
-	ft_putnbr_fd(num, 1);
-	len = 2;
-	if (num >= 0)
+	len = 0;
+	if (!str)
 	{
-		num *= -1;
-		len--;
+		write(1, "(null)", 6);
+		return (6);
 	}
-	while (num < -9)
+	while (str[len] != '\0')
 	{
+		write(1, &str[len], 1);
 		len++;
-		num /= 10;
 	}
 	return (len);
 }

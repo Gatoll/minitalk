@@ -6,7 +6,7 @@
 #    By: kaokazak <kaokazak@student.42tokyo.jp>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/18 14:50:07 by kaokazak          #+#    #+#              #
-#    Updated: 2024/08/18 15:27:56 by kaokazak         ###   ########.fr        #
+#    Updated: 2024/08/20 00:19:20 by kaokazak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
-DIR_PRINTF = ft_printf
-LIBFTPRINTF = libftprintf.a
+DIR_LIBFT = libft
+LIBFT = libft.a
 CLIENT = client
 SERVER = server
 CLIENT_BONUS = client_bonus
@@ -31,25 +31,25 @@ all: $(NAME)
 
 $(NAME): $(CLIENT) $(SERVER)
 
-$(DIR_PRINTF)/libftprintf.a :
-	make -C ./$(DIR_PRINTF)
+$(DIR_LIBFT)/libft.a :
+	make -C ./$(DIR_LIBFT)
 
-$(CLIENT) : $(DIR_PRINTF) $(SRC_CLIENT) $(DIR_PRINTF)/libftprintf.a
-	$(CC) $(CFLAGS) $(SRC_CLIENT) -L./$(DIR_PRINTF)/ -lftprintf -o $(CLIENT)
+$(CLIENT) : $(DIR_LIBFT) $(SRC_CLIENT) $(DIR_LIBFT)/libft.a
+	$(CC) $(CFLAGS) $(SRC_CLIENT) -L./$(DIR_LIBFT)/ -lft -o $(CLIENT)
 
-$(SERVER) : $(DIR_PRINTF) $(SRC_SERVER) $(DIR_PRINTF)/libftprintf.a
-	$(CC) $(CFLAGS) $(SRC_SERVER) -L./$(DIR_PRINTF)/ -lftprintf -o $(SERVER)
+$(SERVER) : $(DIR_LIBFT) $(SRC_SERVER) $(DIR_LIBFT)/libft.a
+	$(CC) $(CFLAGS) $(SRC_SERVER) -L./$(DIR_LIBFT)/ -lft -o $(SERVER)
 
-$(CLIENT_BONUS) : $(DIR_PRINTF) $(SRC_CLIENT_BONUS) $(DIR_PRINTF)/libftprintf.a
-	$(CC) $(CFLAGS) $(SRC_CLIENT_BONUS) -L./$(DIR_PRINTF)/ -lftprintf -o $(CLIENT_BONUS)
+$(CLIENT_BONUS) : $(DIR_LIBFT) $(SRC_CLIENT_BONUS) $(DIR_LIBFT)/libft.a
+	$(CC) $(CFLAGS) $(SRC_CLIENT_BONUS) -L./$(DIR_LIBFT)/ -lft -o $(CLIENT_BONUS)
 
-$(SERVER_BONUS) : $(DIR_PRINTF) $(SRC_SERVER_BONUS) $(DIR_PRINTF)/libftprintf.a
-	$(CC) $(CFLAGS) $(SRC_SERVER_BONUS) -L./$(DIR_PRINTF)/ -lftprintf -o $(SERVER_BONUS)
+$(SERVER_BONUS) : $(DIR_LIBFT) $(SRC_SERVER_BONUS) $(DIR_LIBFT)/libft.a
+	$(CC) $(CFLAGS) $(SRC_SERVER_BONUS) -L./$(DIR_LIBFT)/ -lft -o $(SERVER_BONUS)
 
 bonus: $(CLIENT_BONUS) $(SERVER_BONUS)
 
 clean:
-	make fclean -C ./$(DIR_PRINTF)
+	make fclean -C ./$(DIR_LIBFT)
 
 fclean: clean
 	$(RM) $(CLIENT) $(SERVER) $(CLIENT_BONUS) $(SERVER_BONUS)

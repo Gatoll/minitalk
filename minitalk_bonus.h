@@ -6,15 +6,15 @@
 /*   By: kaokazak <kaokazak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 14:50:10 by kaokazak          #+#    #+#             */
-/*   Updated: 2024/08/18 14:51:25 by kaokazak         ###   ########.fr       */
+/*   Updated: 2024/08/20 00:24:05 by kaokazak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINITALK_BONUS_H
 # define MINITALK_BONUS_H
 
-# include "./ft_printf/ft_printf.h"
-# include "./ft_printf/libft/libft.h"
+# include "./libft/include/ft_printf.h"
+# include "./libft/include/libft.h"
 # include <aio.h>
 # include <signal.h>
 

@@ -6,16 +6,17 @@
 /*   By: kaokazak <kaokazak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:29:56 by kaokazak          #+#    #+#             */
-/*   Updated: 2024/04/30 13:35:27 by kaokazak         ###   ########.fr       */
+/*   Updated: 2024/08/19 23:51:47 by kaokazak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "./libft/libft.h"
+# include <unistd.h>
 # include <stdarg.h>
 # include <stdint.h>
+
 # define HEX_UPPER "0123456789ABCDEF"
 # define HEX_LOWER "0123456789abcdef"
 

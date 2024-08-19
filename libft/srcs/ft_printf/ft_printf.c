@@ -6,12 +6,11 @@
 /*   By: kaokazak <kaokazak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:29:59 by kaokazak          #+#    #+#             */
-/*   Updated: 2024/08/14 04:12:33 by kaokazak         ###   ########.fr       */
+/*   Updated: 2024/08/19 05:31:44 by kaokazak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include "libft/libft.h"
 
 static int	ft_format(char format, va_list args)
 {
