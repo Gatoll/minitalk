@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_put_diux.c                                      :+:      :+:    :+:   */
+/*   ft_put_pdiux.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kaokazak <kaokazak@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/29 13:30:04 by kaokazak          #+#    #+#             */
-/*   Updated: 2024/08/19 18:18:42 by kaokazak         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:23:48 by kaokazak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,11 @@
 int	ft_putnbr_len(int num)
 {
 	long int	nb;
-	int len;
-	char c;
-	
+	int			len;
+	char		c;
+
 	nb = (long)num;
 	len = 0;
-	
 	if (nb < 0)
 	{
 		write(1, "-", 1);
@@ -32,14 +31,13 @@ int	ft_putnbr_len(int num)
 	c = nb % 10 + '0';
 	write(1, &c, 1);
 	len++;
-
 	return (len);
 }
 
 int	ft_putunbr_len(unsigned int num)
 {
-	int	len;
-	char c;
+	int		len;
+	char	c;
 
 	len = 0;
 	if (num > 9)
